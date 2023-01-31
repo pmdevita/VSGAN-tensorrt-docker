@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append("/workspace/tensorrt/")
+from pathlib import Path
+sys.path.append(Path(__file__).parent)
 import vapoursynth as vs
 
 # video imports
@@ -159,10 +160,10 @@ def inference_clip(video_path="", clip=None):
     # vs-mlrt (you need to create the engine yourself, read the readme)
     clip = core.trt.Model(
         clip,
-        engine_path="/workspace/tensorrt/cugan.engine",
+        engine_path="model.engine",
         #tilesize=[854, 480],
         overlap=[0 ,0],
-        num_streams=4,
+        num_streams=1,
     )
 
     # vs-mlrt (DPIR)
@@ -276,9 +277,9 @@ def inference_clip(video_path="", clip=None):
     # Color Transfer
     ####
 
-    # original_clip = original_clip.resize.Spline16(format=vs.RGB24, matrix_in_s="470bg")
-    # clip = clip.resize.Spline16(format=vs.RGB24, matrix_in_s="470bg")
-    # clip = vs_color_match(clip, original_clip, method="mkl")
+    original_clip = original_clip.resize.Spline16(format=vs.RGB24, matrix_in_s="470bg")
+    clip = clip.resize.Spline16(format=vs.RGB24, matrix_in_s="470bg")
+    clip = vs_color_match(clip, original_clip, method="mkl")
 
     ###############################################
     # OUTPUT
