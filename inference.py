@@ -1,7 +1,7 @@
 import sys
 
 from pathlib import Path
-sys.path.append(Path(__file__).parent)
+sys.path.append(str(Path(__file__).parent))
 from inference_config import inference_clip
 
 video_path = "/xbox/dx2/dx_01.mkv"

@@ -1,7 +1,7 @@
 import sys
 import os
 from pathlib import Path
-sys.path.append(Path(__file__).parent)
+sys.path.append(str(Path(__file__).parent))
 import vapoursynth as vs
 
 # video imports
