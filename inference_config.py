@@ -162,7 +162,7 @@ def inference_clip(video_path="", clip=None):
         clip,
         engine_path="model.engine",
         #tilesize=[854, 480],
-        overlap=[0 ,0],
+        overlap=[0, 0],
         num_streams=1,
     )
 
@@ -279,7 +279,7 @@ def inference_clip(video_path="", clip=None):
 
     original_clip = original_clip.resize.Spline16(format=vs.RGB24, matrix_in_s="470bg")
     clip = clip.resize.Spline16(format=vs.RGB24, matrix_in_s="470bg")
-    clip = vs_color_match(clip, original_clip, method="mkl")
+    clip = vs_color_match(clip, original_clip, method="hm-mkl-hm")
 
     ###############################################
     # OUTPUT
