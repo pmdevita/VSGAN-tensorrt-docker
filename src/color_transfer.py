@@ -1,7 +1,21 @@
+import sys
+
 import vapoursynth as vs
 import color_matcher
-from color_matcher.normalizer import Normalizer
+from color_matcher.normalizer import Normalizer as OldNormalizer
 import numpy as np
+
+
+class Normalizer(OldNormalizer):
+    def norm_fun(self):
+        """ normalize image to values between 1 and 0 """
+        norm = (self._data - self._min) / (self._max - self._min) if self._max != self._min else self._data
+
+        # prevent wrap-around
+        norm[norm < 0] = 0
+        norm[norm > 1] = 1
+
+        return norm
 
 
 def vs_color_match(clip, reference_clip, method=None):
